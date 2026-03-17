@@ -1,0 +1,35 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Create an Account</h2>
+        <form name="registerForm" ng-submit="register()" novalidate>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="form-control" ng-model="user.name" required>
+                <span class="error-msg" ng-show="registerForm.name.$dirty && registerForm.name.$error.required">Name is required.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" ng-model="user.email" required>
+                <span class="error-msg" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">Email is required.</span>
+                <span class="error-msg" ng-show="registerForm.email.$dirty && registerForm.email.$error.email">Invalid email format.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" ng-model="user.password" required ng-minlength="6">
+                <span class="error-msg" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">Password is required.</span>
+                <span class="error-msg" ng-show="registerForm.password.$dirty && registerForm.password.$error.minlength">Password must be at least 6 characters.</span>
+            </div>
+
+            <span class="error-msg" ng-show="errorMessage">{{ errorMessage }}</span>
+            <span class="error-msg" style="color: var(--success-color);" ng-show="successMessage">{{ successMessage }}</span>
+
+            <button type="submit" class="btn-submit" ng-disabled="registerForm.$invalid">Register</button>
+        </form>
+        
+        <div class="auth-links">
+            <p>Already have an account? <a href="#!/login">Login here</a></p>
+        </div>
+    </div>
+</div>

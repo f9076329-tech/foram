@@ -1,0 +1,28 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Login to QuizGen</h2>
+        <form name="loginForm" ng-submit="login()" novalidate>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" ng-model="user.email" required>
+                <span class="error-msg" ng-show="loginForm.email.$dirty && loginForm.email.$error.required">Email is required.</span>
+                <span class="error-msg" ng-show="loginForm.email.$dirty && loginForm.email.$error.email">Invalid email format.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" ng-model="user.password" required ng-minlength="6">
+                <span class="error-msg" ng-show="loginForm.password.$dirty && loginForm.password.$error.required">Password is required.</span>
+                <span class="error-msg" ng-show="loginForm.password.$dirty && loginForm.password.$error.minlength">Password must be at least 6 characters.</span>
+            </div>
+
+            <span class="error-msg" ng-show="errorMessage">{{ errorMessage }}</span>
+
+            <button type="submit" class="btn-submit" ng-disabled="loginForm.$invalid">Login</button>
+        </form>
+        
+        <div class="auth-links">
+            <p>Don't have an account? <a href="#!/register">Register here</a></p>
+        </div>
+    </div>
+</div>

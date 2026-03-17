@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="quizApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizGen - Online Quiz Generator</title>
+    <!-- AngularJS 1.x -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <nav class="navbar" ng-controller="NavController">
+        <div class="nav-brand">QuizGen</div>
+        <div class="nav-links">
+            <a href="#!/" ng-if="!isLoggedIn()">Home</a>
+            <a href="#!/dashboard" ng-if="isLoggedIn()">Dashboard</a>
+            <a href="#!/login" ng-if="!isLoggedIn()" class="btn-login">Login</a>
+            <a href="#!/register" ng-if="!isLoggedIn()" class="btn-register">Register</a>
+            <button ng-if="isLoggedIn()" ng-click="logout()" class="btn-logout">Logout</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Route Views will be injected here -->
+        <div ng-view></div>
+    </main>
+
+    <!-- App Module & Config -->
+    <script src="app.js"></script>
+    
+    <!-- Services -->
+    <script src="services/auth.service.js"></script>
+    <script src="services/quiz.service.js"></script>
+    
+    <!-- Controllers -->
+    <script src="components/login/login.controller.js"></script>
+    <script src="components/register/register.controller.js"></script>
+    <script src="components/dashboard/dashboard.controller.js"></script>
+</body>
+</html>

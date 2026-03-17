@@ -1,0 +1,53 @@
+<div class="dashboard-header">
+    <h2>Welcome, {{ currentUser.name || currentUser.email }}</h2>
+    <p>Upload your study materials to generate a quiz</p>
+</div>
+
+<!-- Upload Section -->
+<div class="dashboard-card">
+    <div class="upload-area" 
+         ng-class="{'dragover': isDragOver}" 
+         ng-click="triggerFileInput()"
+         ng-drop="onDrop($event)"
+         ng-dragover="onDragOver($event)"
+         ng-dragleave="onDragLeave($event)">
+        
+        <div class="upload-icon">
+            <span ng-hide="isGenerating">📄</span>
+            <span ng-show="isGenerating">⏳</span>
+        </div>
+        
+        <h3 ng-hide="isGenerating">Click or Drag & Drop material here</h3>
+        <h3 ng-show="isGenerating">Analyzing document & generating quiz...</h3>
+        
+        <p ng-hide="isGenerating" class="text-muted" style="margin-top: 0.5rem;">
+            Supports PDF, DOCX, TXT (Simulated)
+        </p>
+        
+        <input type="file" id="fileInput" class="file-input" onchange="angular.element(this).scope().onFileSelect(this.files)" accept=".pdf,.doc,.docx,.txt">
+    </div>
+</div>
+
+<!-- Generated Quizzes Section -->
+<div class="dashboard-card" ng-if="quizzes.length > 0">
+    <h3>Your Generated Quizzes</h3>
+    
+    <div class="quiz-list">
+        <div class="quiz-item" ng-repeat="quiz in quizzes | orderBy:'-date'">
+            <h4>{{ quiz.title }}</h4>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">
+                Created: {{ quiz.date | date:'mediumDate' }}
+            </p>
+            <p>{{ quiz.questions.length }} Questions</p>
+            
+            <button class="btn-submit" style="padding: 0.5rem; margin-top: 1rem;" ng-click="viewQuiz(quiz)">
+                Take Quiz
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Empty State -->
+<div class="dashboard-card" ng-if="quizzes.length === 0" style="text-align: center; color: var(--text-muted);">
+    <p>You haven't generated any quizzes yet. Upload a document to get started!</p>
+</div>
